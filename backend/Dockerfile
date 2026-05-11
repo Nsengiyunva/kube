@@ -3,11 +3,9 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-# Install dependencies first (better layer caching)
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install --omit=dev
 
-# Copy source code
 COPY . .
 
 # ── Production Stage ─────────────────────────────
@@ -28,4 +26,4 @@ USER appuser
 
 EXPOSE 9001
 
-CMD ["node", "server.js"]    # adjust to your entry point
+CMD ["node", "server.js"]
