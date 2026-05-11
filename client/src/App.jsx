@@ -6,7 +6,7 @@ function App() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    fetch('http://localhost:9001')
+    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:9001'}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data')
